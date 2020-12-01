@@ -1,4 +1,4 @@
-from itertools import permutations
+from itertools import combinations
 from math import prod
 
 report = []
@@ -14,7 +14,7 @@ with open("task_1_input.txt", "r") as data:
 
 report.sort()
 
-for p in permutations(report, 3):
+for p in combinations(report, 3):
     if sum(p) == 2020:
         print(f"Entries: {p}")
         print(f"Product: {prod(p)}")
