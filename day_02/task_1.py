@@ -21,7 +21,7 @@ with open("input.txt", "r") as data:
 valid_pw = 0
 for line in pw_list:
     cnt = line.password.count(line.letter)
-    if cnt >= line.lo and cnt <= line.hi:
+    if line.lo <= cnt <= line.hi:
         valid_pw += 1
 
 print(f"Number of valid passwords found: {valid_pw}")
