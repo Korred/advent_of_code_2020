@@ -4,7 +4,7 @@ from math import prod
 report = []
 
 # read input data
-with open("task_1_input.txt", "r") as data:
+with open("input.txt", "r") as data:
     for line in data:
 
         # remove entries that are too big
