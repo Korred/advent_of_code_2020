@@ -1,23 +1,11 @@
-from collections import defaultdict, deque
-
 numbers = list(map(int, open("input.txt", "r").read().strip().split(",")))
-last_number_lkp = defaultdict(lambda: deque(maxlen=2))
-limit = 30000000
+last_lkp = {n: i for i, n in enumerate(numbers)}
+steps = 30000000
 
-for e, n in enumerate(numbers):
-    last_number_lkp[n].append(e)
+last_num = numbers[-1]
+for i in range(len(numbers) - 1, steps - 1):
+    new_num = i - last_lkp.get(last_num, i)
+    last_lkp[last_num] = i
+    last_num = new_num
 
-cnt = len(numbers)
-while cnt < limit:
-    n = numbers[-1]
-    new_n = 0
-
-    if n in last_number_lkp:
-        if len(last_number_lkp[n]) == 2:
-            new_n = abs(last_number_lkp[n][0] - last_number_lkp[n][1])
-
-    last_number_lkp[new_n].append(cnt)
-    numbers.append(new_n)
-
-    cnt += 1
-print(f"The 30000000th number spoken is: {numbers[-1]}")
+print(f"The 30000000th number spoken is: {last_num}")

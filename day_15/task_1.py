@@ -1,23 +1,11 @@
-from collections import defaultdict, deque
+numbers = list(map(int, open("test_input.txt", "r").read().strip().split(",")))
+last_lkp = {n: i for i, n in enumerate(numbers)}
+steps = 2020
 
-numbers = list(map(int, open("input.txt", "r").read().strip().split(",")))
-last_number_lkp = defaultdict(lambda: deque(maxlen=2))
-limit = 2020
+last_num = numbers[-1]
+for i in range(len(numbers) - 1, steps - 1):
+    new_num = i - last_lkp.get(last_num, i)
+    last_lkp[last_num] = i
+    last_num = new_num
 
-for e, n in enumerate(numbers):
-    last_number_lkp[n].append(e)
-
-cnt = len(numbers)
-while cnt < limit:
-    n = numbers[-1]
-    new_n = 0
-
-    if n in last_number_lkp:
-        if len(last_number_lkp[n]) == 2:
-            new_n = abs(last_number_lkp[n][0] - last_number_lkp[n][1])
-
-    last_number_lkp[new_n].append(cnt)
-    numbers.append(new_n)
-
-    cnt += 1
-print(f"The 2020th number spoken is: {numbers[-1]}")
+print(f"The 2020th number spoken is: {last_num}")
