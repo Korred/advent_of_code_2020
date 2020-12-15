@@ -1,4 +1,4 @@
-numbers = list(map(int, open("test_input.txt", "r").read().strip().split(",")))
+numbers = list(map(int, open("input.txt", "r").read().strip().split(",")))
 last_lkp = {n: i for i, n in enumerate(numbers)}
 steps = 2020
 
